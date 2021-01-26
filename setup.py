@@ -6,6 +6,7 @@ setup_requires = [
 
 install_requires = [
     "requests-oauthlib",
+    "pydantic>=1.7.3"
 ]
 
 tests_require = ["pytest", "black>=20"]
