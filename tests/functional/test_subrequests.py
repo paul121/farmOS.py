@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timezone
 
-from farmOS.subrequests import Action, Format, Subrequest, SubrequestsBlueprint
+from farmOS._async.subrequests import Action, Format, Subrequest, SubrequestsBlueprint
 from tests.conftest import farmOS_testing_server
 
 curr_time = datetime.now(timezone.utc)

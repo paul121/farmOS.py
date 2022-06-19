@@ -2,7 +2,7 @@ from functools import partial
 
 from httpx import Client
 
-from farmOS import resource, subrequests
+from farmOS._sync import resource, subrequests
 
 
 class FarmClient(Client):
@@ -15,4 +15,3 @@ class FarmClient(Client):
         self.log = resource.LogAPI(self)
         self.asset = resource.AssetAPI(self)
         self.term = resource.TermAPI(self)
-

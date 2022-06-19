@@ -1,1 +1,2 @@
-from .client import FarmClient
+from ._async.client import AsyncFarmClient
+from ._sync.client import FarmClient

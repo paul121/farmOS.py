@@ -23,10 +23,10 @@ farmOS.py provides some additional features to help use subrequests:
 ## Example 
 
 An example that creates a new asset followed by a new log that references the asset:
-  
+
 ```python
 from farmOS import farmOS
-from farmOS.subrequests import Action, Subrequest, SubrequestsBlueprint, Format
+from farmOS._async.subrequests import Action, Subrequest, SubrequestsBlueprint, Format
 
 client = farmOS("http://localhost", scope="farm_manager", version=2)
 client.authorize('username', 'password')
@@ -40,7 +40,8 @@ plant_type = {
     }
 }
 
-new_plant_type = Subrequest(action=Action.create, requestId="create-plant-type", endpoint="api/taxonomy_term/plant_type", body=plant_type)
+new_plant_type = Subrequest(action=Action.create, requestId="create-plant-type",
+                            endpoint="api/taxonomy_term/plant_type", body=plant_type)
 
 plant = {
     "data": {
@@ -61,7 +62,8 @@ plant = {
         }
     }
 }
-new_asset = Subrequest(action=Action.create, requestId="create-asset", waitFor=["create-plant-type"], endpoint="api/asset/plant", body=plant)
+new_asset = Subrequest(action=Action.create, requestId="create-asset", waitFor=["create-plant-type"],
+                       endpoint="api/asset/plant", body=plant)
 
 log = {
     "data": {
@@ -82,7 +84,8 @@ log = {
         }
     }
 }
-new_log = Subrequest(action=Action.create, requestId="create-log", waitFor=["create-asset"], endpoint="api/log/seeding", body=log)
+new_log = Subrequest(action=Action.create, requestId="create-log", waitFor=["create-asset"], endpoint="api/log/seeding",
+                     body=log)
 
 # Create a blueprint object
 blueprint = SubrequestsBlueprint.parse_obj([new_plant_type, new_asset, new_log])

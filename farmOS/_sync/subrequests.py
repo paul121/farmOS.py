@@ -100,7 +100,9 @@ class SubrequestsBase:
         for sub in blueprint.__root__:
             # Build the URI if an endpoint is provided.
             if sub.uri is None and sub.endpoint is not None:
-                sub.uri = sub.endpoint
+                sub.uri = str(self.client.base_url.copy_with(path=sub.endpoint))
+                sub.uri = "/api"
+                #sub.uri = sub.endpoint
 
             # Set the endpoint to None so it is not included in the serialized subrequest.
             sub.endpoint = None
@@ -110,6 +112,8 @@ class SubrequestsBase:
                 sub.headers["Accept"] = "application/vnd.api+json"
             if sub.body is not None and "Content-Type" not in sub.headers:
                 sub.headers["Content-Type"] = "application/vnd.api+json"
+
+        headers = {"Content-Type": "application/json"}
 
         params = {}
         if format == Format.json.value:
@@ -124,6 +128,7 @@ class SubrequestsBase:
             url=self.subrequest_path,
             params=params,
             json=json,
+            headers=headers,
         )
 
         # Return a json response if requested.
